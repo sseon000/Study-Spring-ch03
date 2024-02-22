@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 기본은 생략시 scope = "singleton" 
+		<bean id="car" class="com.fastcampus.ch3.Car" scope="prototype"/>
+	 -->
+	<bean id="car" class="com.fastcampus.ch3.Car">
+		<constructor-arg name="color" value="red" /> 
+		<constructor-arg name="oil" value="100" />     <!-- 기본형 = value -->
+		<constructor-arg name="engine" ref="engine" /> <!-- 참조형 = ref -->
+		<constructor-arg name="doors">
+			<array value-type="com.fastcampus.ch3.Door">
+				<ref bean="door" />
+				<ref bean="door" />
+			</array>
+		</constructor-arg>
+		<!-- property vs constructor-arg -->
+		<!-- property = 생략된 기본 생성자 사용 -->
+		<!-- constructor-arg = Class에서 추가로 정의한 생성자 --> 
+	</bean>
+	<bean id="engine" class="com.fastcampus.ch3.Engine" />
+	<bean id="door" class="com.fastcampus.ch3.Door" scope="prototype" />
+</beans>
