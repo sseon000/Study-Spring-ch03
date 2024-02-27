@@ -3,7 +3,7 @@ package com.fastcampus.ch3;
 import java.util.Date;
 import java.util.Objects;
 
-public class User {
+public class User2 {
 	private int num;
 	private String id;
 	private String pw;
@@ -15,9 +15,9 @@ public class User {
 	private String type;
 	
 	
-	public User() {}
+	public User2() {}
 	
-	public User(int num, String id, String pw, String name, String gender, Date birthday, String ph, String acept, String type) {
+	public User2(int num, String id, String pw, String name, String gender, Date birthday, String ph, String acept, String type) {
 		this.num = num;
 		this.id = id;
 		this.pw = pw;

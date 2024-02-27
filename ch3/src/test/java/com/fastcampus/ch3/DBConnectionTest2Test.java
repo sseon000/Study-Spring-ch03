@@ -25,7 +25,8 @@ public class DBConnectionTest2Test {
 	public void insertUserTest() throws Exception {
 		deleteUser(65);
 		
-		User user = new User(0101, "test123", "test123", "테스터123", "남자", new Date(), "01012345678", "승인", "정규직");
+		//User user = new User(0101, "test123", "test123", "테스터123", "남자", new Date(), "01012345678", "승인", "정규직");
+		User user = new User();
 		int rowCnt = insertUser(user);
 		
 		assertTrue(rowCnt == 1);
@@ -49,6 +50,7 @@ public class DBConnectionTest2Test {
 		
 		if(rs.next()) {
 			User user = new User();
+			/*
 			user.setNum(rs.getInt(1));
 			user.setId(rs.getString(2));
 			user.setPw(rs.getString(3));
@@ -58,6 +60,7 @@ public class DBConnectionTest2Test {
 			user.setPh(rs.getString(7));
 			user.setAcept(rs.getString(8));
 			user.setType(rs.getString(9));
+			*/
 			return user;
 		}
 		
@@ -83,6 +86,7 @@ public class DBConnectionTest2Test {
 				   + "     values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql); // SQL Injection공격 대응, 성능향상
+		/*
 		pstmt.setInt(1, user.getNum());
 		pstmt.setString(2, user.getId());
 		pstmt.setString(3, user.getPw());
@@ -92,6 +96,7 @@ public class DBConnectionTest2Test {
 		pstmt.setString(7, user.getPh());
 		pstmt.setString(8, user.getAcept());
 		pstmt.setString(9, user.getType());
+		*/
 		
 		int rowCnt = pstmt.executeUpdate(); // insert, delete, update
 		
