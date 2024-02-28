@@ -104,6 +104,38 @@ public class DBConnectionTest2Test {
 	}
 	
 	@Test
+	public void transactionTest() throws Exception{
+		Connection conn = null;
+		
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false); // default = true;
+			
+			String sql = "insert into hankjae.intechmembers "
+					   + "     values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql); // SQL Injection공격 대응, 성능향상
+			pstmt.setString(1, "asdfff");
+			pstmt.setString(2, "1234");
+			pstmt.setString(3, "abc");
+			pstmt.setString(4, "ccc@ccc.com");
+			pstmt.setDate(5, new java.sql.Date(new Date().getDate()));
+			pstmt.setString(6, "fb");
+			
+			int rowCnt = pstmt.executeUpdate();
+			pstmt.setString(1, "asdfff2");
+			rowCnt = pstmt.executeUpdate();
+			
+			conn.commit();
+			
+		} catch(Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test
 	public void springJdbcConnectionTest() throws Exception{
 //	      ApplicationContext ac = new GenericXmlApplicationContext("file:src/main/webapp/WEB-INF/spring/**/root-context.xml");
 //	      DataSource ds = ac.getBean(DataSource.class);
